@@ -14,7 +14,7 @@ Add it in your root build.gradle at the end of repositories:
   
   Add the dependency
   
-  dependencies {
+  	dependencies {
 	        implementation 'com.github.Harshil258:CustomAdview:Tag'
 	}
   
