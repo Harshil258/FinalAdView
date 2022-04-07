@@ -18,13 +18,12 @@ import com.appnext.banners.BannerView
 import com.appnext.core.AppnextAdCreativeType
 import com.appnext.core.AppnextError
 import com.facebook.ads.*
-import com.unity3d.services.banners.api.Banner
 
 class CustomAdview : LinearLayout {
 
     var attributes: TypedArray
     var adLinearContainer: LinearLayout
-    var bannerView : BannerView
+    var bannerView: BannerView
     val webview_banner: FrameLayout
 
     constructor(
@@ -32,7 +31,7 @@ class CustomAdview : LinearLayout {
         attrs: AttributeSet?,
 
         ) : super(context, attrs) {
-//        inflate(context, R.layout.customadlayout, null)
+        inflate(context, R.layout.customadlayout, null)
         var view: View = LayoutInflater.from(context).inflate(R.layout.customadlayout, this, true)
 
         adLinearContainer = view.findViewById(R.id.fb_banner_ad_container)
@@ -47,27 +46,32 @@ class CustomAdview : LinearLayout {
         maxbanner: String,
         appnextbanner: String
     ) {
+
         var bannerAdfb: AdView =
             AdView(context, FBbanner, AdSize.BANNER_HEIGHT_90)
         adLinearContainer.removeAllViewsInLayout()
         adLinearContainer.addView(bannerAdfb)
-        Log.d("adsfgsdfhadgsdg", "webview banner call")
-        Log.d("adsfgsdfhadgsdg", FBbanner)
+        Log.d("showCustomBanner", "FB BANNER REQUEST $FBbanner")
 
         val adListener: AdListener = object : AdListener {
             override fun onError(ad: Ad?, adError: AdError) {
-                Log.d("adsfgsdfhadgsdg", "error")
+
+                Log.d(
+                    "showCustomBanner",
+                    "FB BANNER REQUEST $FBbanner FAILED ERROR : ${adError.toString()}"
+                )
+
 
                 var applovinads =
                     MaxAdView(maxbanner, context)
                 applovinads.setExtraParameter("adaptive_banner", "true")
-
-
-
                 applovinads.setListener(object : MaxAdViewAdListener {
                     override fun onAdLoaded(ad: MaxAd?) {
                         webview_banner.visibility = View.VISIBLE
-                        Log.d("applovinads", "adloded ${ad.toString()}")
+                        Log.d(
+                            "showCustomBanner",
+                            "APPLOVIN BANNER REQUEST $maxbanner LODED"
+                        )
                     }
 
                     override fun onAdDisplayed(ad: MaxAd?) {
@@ -80,7 +84,16 @@ class CustomAdview : LinearLayout {
                     }
 
                     override fun onAdLoadFailed(adUnitId: String?, error: MaxError?) {
-                        Log.d("applovinads", "ad load failed ${error.toString()}")
+                        webview_banner.visibility = View.VISIBLE
+
+                        Log.d(
+                            "showCustomBanner",
+                            "APPLOVIN BANNER REQUEST $maxbanner FAILED ERROR : ${error.toString()}"
+                        )
+                        Log.d(
+                            "showCustomBanner",
+                            "APPNEXT BANNER REQUEST $appnextbanner"
+                        )
 
                         val banner = BannerView(context)
                         banner.setPlacementId(appnextbanner)
@@ -97,13 +110,19 @@ class CustomAdview : LinearLayout {
                                 p1: AppnextAdCreativeType?
                             ) {
                                 super.onAdLoaded(p0, p1)
-                                Log.d("adsfgsaedgdgdgsdg", "    Lappnext  ")
+                                Log.d(
+                                    "showCustomBanner",
+                                    "APPNEXT BANNER REQUEST $appnextbanner LODED"
+                                )
                                 bannerView.visibility = View.VISIBLE
                             }
 
                             override fun onError(p0: AppnextError?) {
                                 super.onError(p0)
-                                Log.d("adsfgsaedgdgdgsdg", p0?.errorMessage.toString())
+                                Log.d(
+                                    "showCustomBanner",
+                                    "APPNEXT BANNER REQUEST $maxbanner FAILED ERROR : ${p0?.errorMessage.toString()}"
+                                )
                             }
                         })
                     }
@@ -118,13 +137,22 @@ class CustomAdview : LinearLayout {
                     }
 
                 })
-                webview_banner.addView(applovinads)
                 applovinads.loadAd()
+                webview_banner.addView(applovinads)
+
+                Log.d(
+                    "showCustomBanner",
+                    "APPLOVIN BANNER REQUEST $maxbanner"
+                )
 
             }
 
             override fun onAdLoaded(ad: Ad?) {
                 Log.d("adsfgsdfhadgsdg", "loded")
+                Log.d(
+                    "showCustomBanner",
+                    "FB BANNER REQUEST $FBbanner LODED"
+                )
                 adLinearContainer.visibility = View.VISIBLE
             }
 

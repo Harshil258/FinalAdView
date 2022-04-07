@@ -1,7 +1,7 @@
 package com.Harshil.customadview
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.harshil.customadview.CustomAdview
 
 class MainActivity : AppCompatActivity() {
@@ -13,6 +13,6 @@ class MainActivity : AppCompatActivity() {
         var fbbanner = "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID"
         var appnextbanner = "7212eb01-73c9-4fc4-96e8-fad9630d4aba"
         var maxbanner = "56304bd252a6996a"
-        customadview.showCustomBanner(fbbanner, appnextbanner,maxbanner)
+        customadview.showCustomBanner(fbbanner, maxbanner, appnextbanner)
     }
 }

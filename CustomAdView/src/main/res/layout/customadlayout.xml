@@ -42,6 +42,7 @@
     <FrameLayout
         android:id="@+id/applovinbanner_first"
         android:visibility="gone"
+        android:background="@color/tt_skip_red"
         android:layout_width="match_parent"
         android:layout_height="50dp" />
 
