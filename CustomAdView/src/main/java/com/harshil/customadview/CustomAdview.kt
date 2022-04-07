@@ -1,5 +1,6 @@
 package com.harshil.customadview
 
+import android.app.Activity
 import android.content.Context
 import android.content.res.TypedArray
 import android.util.AttributeSet
@@ -9,9 +10,11 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import com.applovin.mediation.MaxAd
+import com.applovin.mediation.MaxAdListener
 import com.applovin.mediation.MaxAdViewAdListener
 import com.applovin.mediation.MaxError
 import com.applovin.mediation.ads.MaxAdView
+import com.applovin.mediation.ads.MaxInterstitialAd
 import com.appnext.banners.BannerAdRequest
 import com.appnext.banners.BannerSize
 import com.appnext.banners.BannerView
@@ -39,6 +42,33 @@ class CustomAdview : LinearLayout {
         bannerView = view.findViewById(R.id.banner)
 
         attributes = context!!.obtainStyledAttributes(attrs, R.styleable.CustomAdview)
+    }
+
+    fun showInterstitial(activity: Activity?, maxinterstitial: String) {
+        lateinit var interstitialAd: MaxInterstitialAd
+        interstitialAd = MaxInterstitialAd(maxinterstitial, activity)
+        interstitialAd.setListener(object : MaxAdListener {
+            override fun onAdLoaded(ad: MaxAd?) {
+                interstitialAd.showAd()
+                Log.d("showInterstitial", "interstitial loded")
+            }
+
+            override fun onAdDisplayed(ad: MaxAd?) {
+            }
+
+            override fun onAdHidden(ad: MaxAd?) {
+            }
+
+            override fun onAdClicked(maxAd: MaxAd) {}
+            override fun onAdLoadFailed(adUnitId: String?, error: MaxError?) {
+                Log.d("showInterstitial", "ad load failed interstitial ${error.toString()}")
+            }
+
+            override fun onAdDisplayFailed(ad: MaxAd?, error: MaxError?) {
+                interstitialAd.loadAd()
+            }
+        })
+        interstitialAd.loadAd()
     }
 
     fun showCustomBanner(
