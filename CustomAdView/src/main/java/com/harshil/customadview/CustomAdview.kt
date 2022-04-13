@@ -114,7 +114,7 @@ class CustomAdview : LinearLayout {
                     }
 
                     override fun onAdLoadFailed(adUnitId: String?, error: MaxError?) {
-                        webview_banner.visibility = View.VISIBLE
+//                        webview_banner.visibility = View.VISIBLE
 
                         Log.d(
                             "showCustomBanner",
