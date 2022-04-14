@@ -57,7 +57,7 @@ class CustomInterstitial {
 
     fun showInterstitial(activity: Activity?, maxinterstitial: String) {
 
-        if (interstitialcount == interstitialfrequancy.toInt()) {
+        if (interstitialcount % interstitialfrequancy.toInt() == 0) {
             lateinit var interstitialAd: MaxInterstitialAd
             interstitialAd = MaxInterstitialAd(maxinterstitial, activity)
             interstitialAd.setListener(object : MaxAdListener {
