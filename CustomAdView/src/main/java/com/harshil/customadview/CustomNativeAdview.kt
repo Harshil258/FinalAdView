@@ -15,6 +15,10 @@ import com.applovin.mediation.nativeAds.MaxNativeAdListener
 import com.applovin.mediation.nativeAds.MaxNativeAdLoader
 import com.applovin.mediation.nativeAds.MaxNativeAdView
 import com.facebook.ads.*
+import com.google.android.ads.nativetemplates.NativeTemplateStyle
+import com.google.android.ads.nativetemplates.TemplateView
+import com.google.android.gms.ads.AdLoader
+import com.google.android.gms.ads.AdRequest
 
 
 class CustomNativeAdview : LinearLayout {
@@ -43,81 +47,106 @@ class CustomNativeAdview : LinearLayout {
     }
 
     fun showCustomNative(
+        context: Context?,
+        isgoogle: Boolean,
         FBNATIVE: String,
         MAXNATIVE: String,
         fbbanner: String,
         maxbanner: String,
-        appnextbanner: String
+        appnextbanner: String,
+        googlenative: String,
+        googlebanner: String
     ) {
 
-        var nativead: NativeAd
-        nativead = NativeAd(context, FBNATIVE)
+        if (isgoogle == true) {
+            val adLoader = AdLoader.Builder(context, googlenative)
+                .forNativeAd { nativeAd ->
+                    val styles = NativeTemplateStyle.Builder().build()
+                    val template: TemplateView = findViewById<TemplateView>(R.id.my_template)
+                    template.setStyles(styles)
+                    template.setNativeAd(nativeAd)
+                    template.visibility = View.VISIBLE
+                }
+                .build()
 
-        var nativeAdListener = object : NativeAdListener {
+            adLoader.loadAd(AdRequest.Builder().build())
+        } else {
 
-            override fun onAdLoaded(p0: Ad?) {
-                Log.d("showCustomNative", "FBNATIVE LODED $FBNATIVE")
-                nativeAdContainer.visibility = View.VISIBLE
-                val adView = NativeAdView.render(context, nativead)
-                nativeAdContainer.addView(adView, LayoutParams(MATCH_PARENT, 800))
-            }
+            var nativead: NativeAd
+            nativead = NativeAd(context, FBNATIVE)
 
-            override fun onError(p0: Ad?, p1: AdError?) {
+            var nativeAdListener = object : NativeAdListener {
 
-                Log.d("showCustomNative", "FBNATIVE ERROR ${p1.toString()}")
+                override fun onAdLoaded(p0: Ad?) {
+                    Log.d("showCustomNative", "FBNATIVE LODED $FBNATIVE")
+                    nativeAdContainer.visibility = View.VISIBLE
+                    val adView = NativeAdView.render(context, nativead)
+                    nativeAdContainer.addView(adView, LayoutParams(MATCH_PARENT, 800))
+                }
 
-                /////////////////////////////APPLOVIN NATIVE//////////////////////////////////////
+                override fun onError(p0: Ad?, p1: AdError?) {
 
-                Log.d("showCustomNative", "MAXNATIVE REQUESTED $MAXNATIVE")
+                    Log.d("showCustomNative", "FBNATIVE ERROR ${p1.toString()}")
 
-                var nativeAdLoader: MaxNativeAdLoader? = null
-                var MaxnativeAd: MaxAd? = null
-                nativeAdLoader = MaxNativeAdLoader(MAXNATIVE, context)
-                nativeAdLoader.setNativeAdListener(object : MaxNativeAdListener() {
+                    /////////////////////////////APPLOVIN NATIVE//////////////////////////////////////
 
-                    override fun onNativeAdLoaded(p0: MaxNativeAdView?, ad: MaxAd?) {
-                        Log.d("showCustomNative", "MAXNATIVE LODED $MAXNATIVE")
-                        if (MaxnativeAd != null) {
-                            nativeAdLoader.destroy(MaxnativeAd)
+                    Log.d("showCustomNative", "MAXNATIVE REQUESTED $MAXNATIVE")
+
+                    var nativeAdLoader: MaxNativeAdLoader? = null
+                    var MaxnativeAd: MaxAd? = null
+                    nativeAdLoader = MaxNativeAdLoader(MAXNATIVE, context)
+                    nativeAdLoader.setNativeAdListener(object : MaxNativeAdListener() {
+
+                        override fun onNativeAdLoaded(p0: MaxNativeAdView?, ad: MaxAd?) {
+                            Log.d("showCustomNative", "MAXNATIVE LODED $MAXNATIVE")
+                            if (MaxnativeAd != null) {
+                                nativeAdLoader.destroy(MaxnativeAd)
+                            }
+                            MaxnativeAd = ad
+                            nativeadcontainer.removeAllViews()
+                            nativeadcontainer.addView(p0)
                         }
-                        MaxnativeAd = ad
-                        nativeadcontainer.removeAllViews()
-                        nativeadcontainer.addView(p0)
-                    }
 
-                    override fun onNativeAdLoadFailed(adUnitId: String, error: MaxError) {
-                        Log.d("showCustomNative", "MAXNATIVE ERROR $error")
-                        /////////////////////////////CUSTOM BANNER //////////////////////////////////////
-                        customadview.showCustomBanner(fbbanner, maxbanner, appnextbanner)
-                        /////////////////////////////CUSTOM BANNER //////////////////////////////////////
-                    }
+                        override fun onNativeAdLoadFailed(adUnitId: String, error: MaxError) {
+                            Log.d("showCustomNative", "MAXNATIVE ERROR $error")
+                            /////////////////////////////CUSTOM BANNER //////////////////////////////////////
+                            customadview.showCustomBanner(
+                                true,
+                                fbbanner,
+                                maxbanner,
+                                appnextbanner,
+                                googlebanner
+                            )
+                            /////////////////////////////CUSTOM BANNER //////////////////////////////////////
+                        }
 
-                    override fun onNativeAdClicked(ad: MaxAd) {
-                    }
-                })
-                nativeAdLoader.loadAd()
+                        override fun onNativeAdClicked(ad: MaxAd) {
+                        }
+                    })
+                    nativeAdLoader.loadAd()
 
-                /////////////////////////////APPLOVIN NATIVE//////////////////////////////////////
+                    /////////////////////////////APPLOVIN NATIVE//////////////////////////////////////
+
+                }
+
+                override fun onAdClicked(p0: Ad?) {
+                }
+
+                override fun onLoggingImpression(p0: Ad?) {
+                }
+
+                override fun onMediaDownloaded(p0: Ad?) {
+                }
 
             }
 
-            override fun onAdClicked(p0: Ad?) {
-            }
+            Log.d("showCustomNative", "FBNATIVE REQUESTED $FBNATIVE")
 
-            override fun onLoggingImpression(p0: Ad?) {
-            }
-
-            override fun onMediaDownloaded(p0: Ad?) {
-            }
-
+            nativead.loadAd(
+                nativead.buildLoadAdConfig().withAdListener(nativeAdListener)
+                    .withMediaCacheFlag(NativeAdBase.MediaCacheFlag.ALL).build()
+            )
         }
-
-        Log.d("showCustomNative", "FBNATIVE REQUESTED $FBNATIVE")
-
-        nativead.loadAd(
-            nativead.buildLoadAdConfig().withAdListener(nativeAdListener)
-                .withMediaCacheFlag(NativeAdBase.MediaCacheFlag.ALL).build()
-        )
 
     }
 
