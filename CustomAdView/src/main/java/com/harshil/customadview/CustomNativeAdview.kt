@@ -111,7 +111,7 @@ class CustomNativeAdview : LinearLayout {
                             Log.d("showCustomNative", "MAXNATIVE ERROR $error")
                             /////////////////////////////CUSTOM BANNER //////////////////////////////////////
                             customadview.showCustomBanner(
-                                true,
+                                isgoogle,
                                 fbbanner,
                                 maxbanner,
                                 appnextbanner,
