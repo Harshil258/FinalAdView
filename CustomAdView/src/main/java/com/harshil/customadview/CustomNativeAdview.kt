@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import com.applovin.mediation.MaxAd
@@ -81,7 +82,7 @@ class CustomNativeAdview : LinearLayout {
                     Log.d("showCustomNative", "FBNATIVE LODED $FBNATIVE")
                     nativeAdContainer.visibility = View.VISIBLE
                     val adView = NativeAdView.render(context, nativead)
-                    nativeAdContainer.addView(adView, LayoutParams(MATCH_PARENT, 800))
+                    nativeAdContainer.addView(adView, LayoutParams(MATCH_PARENT, WRAP_CONTENT))
                 }
 
                 override fun onError(p0: Ad?, p1: AdError?) {
