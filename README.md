@@ -66,6 +66,9 @@ Custom native
                 )
 		
 	 customInterstitial = CustomInterstitial(interstitialfrequancy.toInt())
+	 if (adson == true) {
+            customInterstitial.showInterstitial(this, maxinterstitial)
+        }
 	 
 custom banner
 
