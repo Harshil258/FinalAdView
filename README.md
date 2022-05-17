@@ -16,6 +16,8 @@ Add it in your root build.gradle at the end of repositories:
   
   	dependencies {
 	        implementation 'com.github.Harshil258:CustomAdview:v1.0.2'
+		    implementation 'com.github.Harshil258.HarshilAdView:nativetemplates:1.0.2'
+
 	}
   
   All Variables
