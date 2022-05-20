@@ -147,6 +147,7 @@ class CustomAdview : LinearLayout {
                 AdView(context, FBbanner, AdSize.BANNER_HEIGHT_90)
             adLinearContainer.removeAllViewsInLayout()
             adLinearContainer.addView(bannerAdfb)
+            var firssttime: Boolean = true
             Log.d("showCustomBanner", "FB BANNER REQUEST $FBbanner")
 
             val adListener: AdListener = object : AdListener {
@@ -182,45 +183,49 @@ class CustomAdview : LinearLayout {
                         override fun onAdLoadFailed(adUnitId: String?, error: MaxError?) {
 //                        webview_banner.visibility = View.VISIBLE
 
-                            Log.d(
-                                "showCustomBanner",
-                                "APPLOVIN BANNER REQUEST $maxbanner FAILED ERROR : ${error.toString()}"
-                            )
-                            Log.d(
-                                "showCustomBanner",
-                                "APPNEXT BANNER REQUEST $appnextbanner"
-                            )
+                            if (firssttime) {
+                                Log.d(
+                                    "showCustomBanner",
+                                    "APPLOVIN BANNER REQUEST $maxbanner FAILED ERROR : ${error.toString()}"
+                                )
+                                Log.d(
+                                    "showCustomBanner",
+                                    "APPNEXT BANNER REQUEST $appnextbanner"
+                                )
 
-                            val banner = BannerView(context)
-                            banner.setPlacementId(appnextbanner)
-                            banner.setBannerSize(BannerSize.LARGE_BANNER)
+                                val banner = BannerView(context)
+                                banner.setPlacementId(appnextbanner)
+                                banner.setBannerSize(BannerSize.LARGE_BANNER)
 
-                            bannerView.setPlacementId(appnextbanner)
-                            bannerView.setBannerSize(BannerSize.LARGE_BANNER)
-                            bannerView.loadAd(BannerAdRequest())
+                                bannerView.setPlacementId(appnextbanner)
+                                bannerView.setBannerSize(BannerSize.LARGE_BANNER)
+                                bannerView.loadAd(BannerAdRequest())
 
-                            bannerView.setBannerListener(object :
-                                com.appnext.banners.BannerListener() {
-                                override fun onAdLoaded(
-                                    p0: String?,
-                                    p1: AppnextAdCreativeType?
-                                ) {
-                                    super.onAdLoaded(p0, p1)
-                                    Log.d(
-                                        "showCustomBanner",
-                                        "APPNEXT BANNER REQUEST $appnextbanner LODED"
-                                    )
-                                    bannerView.visibility = View.VISIBLE
-                                }
+                                bannerView.setBannerListener(object :
+                                    com.appnext.banners.BannerListener() {
+                                    override fun onAdLoaded(
+                                        p0: String?,
+                                        p1: AppnextAdCreativeType?
+                                    ) {
+                                        super.onAdLoaded(p0, p1)
+                                        Log.d(
+                                            "showCustomBanner",
+                                            "APPNEXT BANNER REQUEST $appnextbanner LODED"
+                                        )
+                                        bannerView.visibility = View.VISIBLE
+                                    }
 
-                                override fun onError(p0: AppnextError?) {
-                                    super.onError(p0)
-                                    Log.d(
-                                        "showCustomBanner",
-                                        "APPNEXT BANNER REQUEST $maxbanner FAILED ERROR : ${p0?.errorMessage.toString()}"
-                                    )
-                                }
-                            })
+                                    override fun onError(p0: AppnextError?) {
+                                        super.onError(p0)
+                                        Log.d(
+                                            "showCustomBanner",
+                                            "APPNEXT BANNER REQUEST $maxbanner FAILED ERROR : ${p0?.errorMessage.toString()}"
+                                        )
+                                    }
+                                })
+                                firssttime = false
+                            }
+
                         }
 
                         override fun onAdDisplayFailed(ad: MaxAd?, error: MaxError?) {

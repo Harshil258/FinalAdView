@@ -12,10 +12,10 @@ class MainActivity : AppCompatActivity() {
 
         var customadview: CustomAdview = findViewById(R.id.customadview)
         var fbbanner = "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID"
-        var appnextbanner = "7212eb01-73c9-4fc4-96e8-fad9630d4aba"
+        var appnextbanner = "fsdsfzsfhgf"
         var maxbanner = "56304bd252a6996a"
         var googlebanner = "ca-app-pub-3940256099942544/6300978111"
-        customadview.showCustomBanner(true, fbbanner, maxbanner, appnextbanner, googlebanner)
+//        customadview.showCustomBanner(true, fbbanner, maxbanner, appnextbanner, googlebanner)
 
 //        customadview.showInterstitial(true,this,"adfgsadg","ca-app-pub-3940256099942544/1033173712")
 
@@ -23,9 +23,9 @@ class MainActivity : AppCompatActivity() {
             findViewById<CustomNativeAdview>(R.id.customnativead)
         customnativead.showCustomNative(
             this,
-            true,
-            "",
-            "",
+            false,
+            "sdrtyjdyjdyjk",
+            "srjsdryjdyj",
             fbbanner,
             maxbanner,
             appnextbanner,
