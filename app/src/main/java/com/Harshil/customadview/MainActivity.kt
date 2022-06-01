@@ -2,6 +2,7 @@ package com.Harshil.customadview
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.applovin.sdk.AppLovinSdk
 import com.harshil.customadview.CustomAdview
 import com.harshil.customadview.CustomNativeAdview
 
@@ -19,13 +20,16 @@ class MainActivity : AppCompatActivity() {
 
 //        customadview.showInterstitial(true,this,"adfgsadg","ca-app-pub-3940256099942544/1033173712")
 
+        AppLovinSdk.getInstance(this).showMediationDebugger()
+
+
         var customnativead: CustomNativeAdview =
             findViewById<CustomNativeAdview>(R.id.customnativead)
         customnativead.showCustomNative(
             this,
             false,
             "sdrtyjdyjdyjk",
-            "srjsdryjdyj",
+            "6fe2a083301f6afb",
             fbbanner,
             maxbanner,
             appnextbanner,
