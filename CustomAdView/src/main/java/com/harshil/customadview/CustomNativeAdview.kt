@@ -105,6 +105,7 @@ class CustomNativeAdview : LinearLayout {
                             }
                             MaxnativeAd = ad
                             nativeadcontainer.removeAllViews()
+                            nativeAdContainer.visibility = View.VISIBLE
                             nativeadcontainer.addView(p0)
                         }
 
