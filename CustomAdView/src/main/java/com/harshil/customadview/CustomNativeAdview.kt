@@ -106,10 +106,22 @@ class CustomNativeAdview : LinearLayout {
                             nativeadcontainer.removeAllViews()
                             nativeAdContainer.visibility = View.VISIBLE
                             nativeadcontainer.addView(p0)
-
-                            Log.d("showCustomNative", "MAXNATIVE p0 ${p0}")
-                            Log.d("showCustomNative", "MAXNATIVE ad ${ad!!.nativeAd.toString()}")
-
+                            
+                            if (p0 == null) {
+                                Log.d("showCustomNative", "MAXNATIVE p0 ${p0}")
+                                Log.d(
+                                    "showCustomNative",
+                                    "MAXNATIVE ad ${ad!!.nativeAd.toString()}"
+                                )
+                                /////////////////////////////CUSTOM BANNER //////////////////////////////////////
+                                customadview.showCustomBanner(
+                                    isgoogle,
+                                    fbbanner,
+                                    maxbanner,
+                                    appnextbanner,
+                                    googlebanner
+                                )
+                            }
                         }
 
                         override fun onNativeAdLoadFailed(adUnitId: String, error: MaxError) {
