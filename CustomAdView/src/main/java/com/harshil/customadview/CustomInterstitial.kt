@@ -74,15 +74,17 @@ class CustomInterstitial {
         googleinterstitial: String
     ) {
 
-        var dialog = Dialog(activity!!)
-        dialog.setContentView(R.layout.customloader)
-        dialog.setCancelable(false)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
+
 
         if (isgoogle == true) {
 
             if (interstitialcount % interstitialfrequancy.toInt() == 0) {
+
+                var dialog = Dialog(activity!!)
+                dialog.setContentView(R.layout.customloader)
+                dialog.setCancelable(false)
+                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                dialog.show()
 
                 val mInterstitialAd =
                     arrayOfNulls<com.google.android.gms.ads.interstitial.InterstitialAd>(1)
@@ -117,6 +119,12 @@ class CustomInterstitial {
             }
         } else {
             if (interstitialcount % interstitialfrequancy.toInt() == 0) {
+                var dialog = Dialog(activity!!)
+                dialog.setContentView(R.layout.customloader)
+                dialog.setCancelable(false)
+                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                dialog.show()
+                
                 lateinit var interstitialAd: MaxInterstitialAd
                 interstitialAd = MaxInterstitialAd(maxinterstitial, activity)
                 interstitialAd.setListener(object : MaxAdListener {
