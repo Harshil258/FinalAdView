@@ -81,36 +81,40 @@ class CustomInterstitial {
         dialog.show()
 
         if (isgoogle == true) {
-            val mInterstitialAd =
-                arrayOfNulls<com.google.android.gms.ads.interstitial.InterstitialAd>(1)
-            val adRequest = AdRequest.Builder().build()
-            com.google.android.gms.ads.interstitial.InterstitialAd.load(
-                activity,
-                googleinterstitial,
-                adRequest,
-                object : InterstitialAdLoadCallback() {
-                    override fun onAdLoaded(googleinterstitialAd: com.google.android.gms.ads.interstitial.InterstitialAd) {
-                        // The mInterstitialAd reference will be null until
-                        // an ad is loaded.
-                        mInterstitialAd[0] = googleinterstitialAd
-                        Log.i("showInterstitial", "google interstitial onAdLoaded")
-                        if (mInterstitialAd[0] != null) {
-                            mInterstitialAd[0]!!.show((activity)!!)
+
+            if (interstitialcount % interstitialfrequancy.toInt() == 0) {
+
+                val mInterstitialAd =
+                    arrayOfNulls<com.google.android.gms.ads.interstitial.InterstitialAd>(1)
+                val adRequest = AdRequest.Builder().build()
+                com.google.android.gms.ads.interstitial.InterstitialAd.load(
+                    activity,
+                    googleinterstitial,
+                    adRequest,
+                    object : InterstitialAdLoadCallback() {
+                        override fun onAdLoaded(googleinterstitialAd: com.google.android.gms.ads.interstitial.InterstitialAd) {
+                            // The mInterstitialAd reference will be null until
+                            // an ad is loaded.
+                            mInterstitialAd[0] = googleinterstitialAd
+                            Log.i("showInterstitial", "google interstitial onAdLoaded")
+                            if (mInterstitialAd[0] != null) {
+                                mInterstitialAd[0]!!.show((activity)!!)
+                                dialog.dismiss()
+
+                            } else {
+                                Log.d("showInterstitial", "The interstitial ad wasn't ready yet.")
+                            }
+                        }
+
+                        override fun onAdFailedToLoad(loadAdError: LoadAdError) {
+                            // Handle the error
+                            Log.i("showInterstitial", loadAdError.message)
+                            mInterstitialAd[0] = null
                             dialog.dismiss()
 
-                        } else {
-                            Log.d("showInterstitial", "The interstitial ad wasn't ready yet.")
                         }
-                    }
-
-                    override fun onAdFailedToLoad(loadAdError: LoadAdError) {
-                        // Handle the error
-                        Log.i("showInterstitial", loadAdError.message)
-                        mInterstitialAd[0] = null
-                        dialog.dismiss()
-
-                    }
-                })
+                    })
+            }
         } else {
             if (interstitialcount % interstitialfrequancy.toInt() == 0) {
                 lateinit var interstitialAd: MaxInterstitialAd
