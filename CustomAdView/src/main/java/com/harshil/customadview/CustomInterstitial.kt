@@ -74,7 +74,7 @@ class CustomInterstitial {
         googleinterstitial: String
     ) {
 
-
+        interstitialcount++
 
         if (isgoogle == true) {
 
@@ -124,7 +124,7 @@ class CustomInterstitial {
                 dialog.setCancelable(false)
                 dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.show()
-                
+
                 lateinit var interstitialAd: MaxInterstitialAd
                 interstitialAd = MaxInterstitialAd(maxinterstitial, activity)
                 interstitialAd.setListener(object : MaxAdListener {
