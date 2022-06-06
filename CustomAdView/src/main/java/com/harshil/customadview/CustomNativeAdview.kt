@@ -99,7 +99,7 @@ class CustomNativeAdview : LinearLayout {
                         override fun onNativeAdLoaded(p0: MaxNativeAdView?, ad: MaxAd?) {
                             Log.d("showCustomNative", "MAXNATIVE LODED $MAXNATIVE")
                             Log.d("showCustomNative", "MAXNATIVE AD $p0")
-                            
+
                             if (p0 == null) {
                                 Log.d("showCustomNative", "MAXNATIVE p0 ${p0}")
                                 Log.d(

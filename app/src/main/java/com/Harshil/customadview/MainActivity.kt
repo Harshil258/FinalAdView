@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.applovin.sdk.AppLovinSdk
 import com.harshil.customadview.CustomAdview
+import com.harshil.customadview.CustomInterstitial
 import com.harshil.customadview.CustomNativeAdview
 
 class MainActivity : AppCompatActivity() {
@@ -16,18 +17,29 @@ class MainActivity : AppCompatActivity() {
         var appnextbanner = "fsdsfzsfhgf"
         var maxbanner = "56304bd252a6996a"
         var googlebanner = "ca-app-pub-3940256099942544/6300978111"
+        var googleinterstitial: String = "ca-app-pub-3940256099942544/1033173712"
+
 //        customadview.showCustomBanner(true, fbbanner, maxbanner, appnextbanner, googlebanner)
 
 //        customadview.showInterstitial(true,this,"adfgsadg","ca-app-pub-3940256099942544/1033173712")
 
         AppLovinSdk.getInstance(this).showMediationDebugger()
 
+        var customInterstitial: CustomInterstitial =
+            CustomInterstitial(1)
+
+        customInterstitial.showInterstitial(
+            true,
+            this,
+            "sdgsdgsdgsdg",
+            googleinterstitial
+        )
 
         var customnativead: CustomNativeAdview =
             findViewById<CustomNativeAdview>(R.id.customnativead)
         customnativead.showCustomNative(
             this,
-            false,
+            true,
             "sdrtyjdyjdyjk",
             "6fe2a083301f6afb",
             fbbanner,

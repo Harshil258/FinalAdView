@@ -1,6 +1,9 @@
 package com.harshil.customadview
 
 import android.app.Activity
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.util.Log
 import com.applovin.mediation.*
 import com.applovin.mediation.ads.MaxInterstitialAd
@@ -71,6 +74,11 @@ class CustomInterstitial {
         googleinterstitial: String
     ) {
 
+        var dialog = Dialog(activity!!)
+        dialog.setContentView(R.layout.customloader)
+        dialog.setCancelable(false)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
 
         if (isgoogle == true) {
             val mInterstitialAd =
@@ -88,6 +96,8 @@ class CustomInterstitial {
                         Log.i("showInterstitial", "google interstitial onAdLoaded")
                         if (mInterstitialAd[0] != null) {
                             mInterstitialAd[0]!!.show((activity)!!)
+                            dialog.dismiss()
+
                         } else {
                             Log.d("showInterstitial", "The interstitial ad wasn't ready yet.")
                         }
@@ -97,6 +107,8 @@ class CustomInterstitial {
                         // Handle the error
                         Log.i("showInterstitial", loadAdError.message)
                         mInterstitialAd[0] = null
+                        dialog.dismiss()
+
                     }
                 })
         } else {
@@ -107,6 +119,8 @@ class CustomInterstitial {
                     override fun onAdLoaded(ad: MaxAd?) {
                         interstitialAd.showAd()
                         Log.d("showInterstitial", "interstitial loded")
+                        dialog.dismiss()
+
                     }
 
                     override fun onAdDisplayed(ad: MaxAd?) {
@@ -118,6 +132,7 @@ class CustomInterstitial {
                     override fun onAdClicked(maxAd: MaxAd) {}
                     override fun onAdLoadFailed(adUnitId: String?, error: MaxError?) {
                         Log.d("showInterstitial", "ad load failed interstitial ${error.toString()}")
+                        dialog.dismiss()
                     }
 
                     override fun onAdDisplayFailed(ad: MaxAd?, error: MaxError?) {
