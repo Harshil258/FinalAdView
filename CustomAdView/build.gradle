@@ -52,6 +52,9 @@ dependencies {
     implementation 'com.facebook.android:audience-network-sdk:6.+'
     implementation 'com.applovin.mediation:bytedance-adapter:+'
 
+    implementation 'com.applovin.mediation:adcolony-adapter:+'
+
+
     implementation 'com.google.android.gms:play-services-ads:20.6.0'
     implementation project(':nativetemplates')
 
