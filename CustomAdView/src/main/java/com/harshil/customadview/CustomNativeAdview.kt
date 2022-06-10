@@ -53,8 +53,11 @@ class CustomNativeAdview : LinearLayout {
         maxbanner: String,
         appnextbanner: String,
         googlenative: String,
-        googlebanner: String
+        googlebanner: String,
+        nativeclickcounter: Int,
+        nativeclick: Int
     ) {
+        val nativeAdCover: LinearLayout = findViewById<LinearLayout>(R.id.nativeAdCover)
 
         if (isgoogle == true) {
             val adLoader = AdLoader.Builder(context, googlenative)
@@ -77,6 +80,15 @@ class CustomNativeAdview : LinearLayout {
 
                 override fun onAdLoaded(p0: Ad?) {
                     Log.d("showCustomNative", "FBNATIVE LODED $FBNATIVE")
+
+                    if (nativeclickcounter % nativeclick == 0) {
+                        Log.d("nativesfdgf", nativeclickcounter.toString())
+                        Log.d("nativesfdgf", "welcomee activity ads are clickable")
+                    } else {
+                        Log.d("nativesfdgf", "welcomee activity ads are not clickable")
+                        nativeAdCover.visibility = View.VISIBLE
+                    }
+
                     nativeAdContainer.visibility = View.VISIBLE
                     val adView = NativeAdView.render(context, nativead)
                     nativeAdContainer.addView(adView, LayoutParams(MATCH_PARENT, 1200))
@@ -99,6 +111,7 @@ class CustomNativeAdview : LinearLayout {
                         override fun onNativeAdLoaded(p0: MaxNativeAdView?, ad: MaxAd?) {
                             Log.d("showCustomNative", "MAXNATIVE LODED $MAXNATIVE")
                             Log.d("showCustomNative", "MAXNATIVE AD $p0")
+                            Log.d("showCustomNative", "MAXNATIVE AD ${ad!!.nativeAd.toString()}")
 
                             if (p0 == null) {
                                 Log.d("showCustomNative", "MAXNATIVE p0 ${p0}")
@@ -118,6 +131,16 @@ class CustomNativeAdview : LinearLayout {
                                 if (MaxnativeAd != null) {
                                     nativeAdLoader.destroy(MaxnativeAd)
                                 }
+                                if (nativeclickcounter % nativeclick == 0) {
+                                    Log.d("nativesfdgf", nativeclickcounter.toString())
+                                    Log.d("nativesfdgf", "welcomee activity ads are clickable")
+                                } else {
+                                    Log.d("nativesfdgf", "welcomee activity ads are not clickable")
+                                    nativeAdCover.visibility = View.VISIBLE
+                                }
+                                Log.d("nativesfasdfdgf", "native ad  $ad")
+                                Log.d("nativesfasdfdgf", "native ad  $p0")
+
                                 MaxnativeAd = ad
                                 nativeadcontainer.removeAllViews()
                                 nativeAdContainer.visibility = View.VISIBLE

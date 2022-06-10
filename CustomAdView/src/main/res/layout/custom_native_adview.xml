@@ -9,7 +9,6 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
-
     <FrameLayout
         android:id="@+id/applovin_native_ad_layout"
         android:layout_width="match_parent"
@@ -24,7 +23,6 @@
         android:orientation="vertical"
         android:visibility="gone" />
 
-
     <com.harshil.customadview.CustomAdview
         android:id="@+id/customadview"
         android:layout_width="wrap_content"
@@ -36,6 +34,20 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         app:gnt_template_type="@layout/gnt_medium_template_view" />
+
+    <LinearLayout
+        android:id="@+id/nativeAdCover"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:background="@android:color/transparent"
+        android:clickable="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="horizontal" />
+
 
 </LinearLayout>
 

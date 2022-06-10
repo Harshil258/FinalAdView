@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.applovin.sdk.AppLovinSdk
 import com.harshil.customadview.CustomAdview
-import com.harshil.customadview.CustomInterstitial
 import com.harshil.customadview.CustomNativeAdview
 
 class MainActivity : AppCompatActivity() {
@@ -24,29 +23,29 @@ class MainActivity : AppCompatActivity() {
 //        customadview.showInterstitial(true,this,"adfgsadg","ca-app-pub-3940256099942544/1033173712")
 
         AppLovinSdk.getInstance(this).showMediationDebugger()
-
-        var customInterstitial: CustomInterstitial =
-            CustomInterstitial(1)
-
-        customInterstitial.showInterstitial(
-            true,
-            this,
-            "sdgsdgsdgsdg",
-            googleinterstitial
-        )
+//
+//        var customInterstitial: CustomInterstitial =
+//            CustomInterstitial(1)
+//
+//        customInterstitial.showInterstitial(
+//            true,
+//            this,
+//            "sdgsdgsdgsdg",
+//            googleinterstitial
+//        )
 
         var customnativead: CustomNativeAdview =
             findViewById<CustomNativeAdview>(R.id.customnativead)
         customnativead.showCustomNative(
             this,
-            true,
+            false,
             "sdrtyjdyjdyjk",
-            "6fe2a083301f6afb",
+            "98ccfa1dbd2cee76",
             fbbanner,
             maxbanner,
             appnextbanner,
             "ca-app-pub-3940256099942544/2247696110",
-            googlebanner
+            googlebanner, 1, 1
         )
 
     }
