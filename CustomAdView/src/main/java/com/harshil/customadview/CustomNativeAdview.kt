@@ -138,6 +138,7 @@ class CustomNativeAdview : LinearLayout {
                                 } else {
                                     Log.d("nativesfdgf", "welcomee activity ads are not clickable")
                                     nativeAdCover.visibility = View.VISIBLE
+
                                 }
                                 Log.d("nativesfasdfdgf", "native ad  $ad")
                                 Log.d("nativesfasdfdgf", "native ad  $p0")

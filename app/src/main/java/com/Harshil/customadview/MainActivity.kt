@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
             "ca-app-pub-3940256099942544/2247696110",
             googlebanner,
             1,
-            1
+            100
         )
 
     }
