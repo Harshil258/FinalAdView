@@ -25,7 +25,7 @@ class CustomNativeAdview : LinearLayout {
 
     var attributes: TypedArray
     var nativeadcontainer: FrameLayout
-    var nativeAdContainer: LinearLayout
+    var MaxnativeAdContainer: LinearLayout
     var customadview: CustomAdview
 
     constructor(
@@ -39,7 +39,8 @@ class CustomNativeAdview : LinearLayout {
 
         nativeadcontainer = view.findViewById(R.id.applovin_native_ad_layout)
         customadview = view.findViewById(R.id.customadview)
-        nativeAdContainer = view.findViewById<View>(R.id.native_banner_ad_container) as LinearLayout
+        MaxnativeAdContainer =
+            view.findViewById<View>(R.id.native_banner_ad_container) as LinearLayout
 
         attributes = context!!.obtainStyledAttributes(attrs, R.styleable.CustomAdview)
     }
@@ -89,9 +90,9 @@ class CustomNativeAdview : LinearLayout {
                         nativeAdCover.visibility = View.VISIBLE
                     }
 
-                    nativeAdContainer.visibility = View.VISIBLE
+                    MaxnativeAdContainer.visibility = View.VISIBLE
                     val adView = NativeAdView.render(context, nativead)
-                    nativeAdContainer.addView(adView, LayoutParams(MATCH_PARENT, 1200))
+                    MaxnativeAdContainer.addView(adView, LayoutParams(MATCH_PARENT, 1200))
                 }
 
                 override fun onError(p0: Ad?, p1: AdError?) {
@@ -143,7 +144,8 @@ class CustomNativeAdview : LinearLayout {
 
                                 MaxnativeAd = ad
                                 nativeadcontainer.removeAllViews()
-                                nativeAdContainer.visibility = View.VISIBLE
+                                MaxnativeAdContainer.visibility = View.VISIBLE
+                                nativeadcontainer.visibility = View.VISIBLE
                                 nativeadcontainer.addView(p0)
                             }
                         }

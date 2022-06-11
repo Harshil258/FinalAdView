@@ -2,7 +2,6 @@ package com.Harshil.customadview
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.applovin.sdk.AppLovinSdk
 import com.harshil.customadview.CustomAdview
 import com.harshil.customadview.CustomNativeAdview
 
@@ -22,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
 //        customadview.showInterstitial(true,this,"adfgsadg","ca-app-pub-3940256099942544/1033173712")
 
-        AppLovinSdk.getInstance(this).showMediationDebugger()
+//        AppLovinSdk.getInstance(this).showMediationDebugger()
 //
 //        var customInterstitial: CustomInterstitial =
 //            CustomInterstitial(1)
@@ -45,7 +44,9 @@ class MainActivity : AppCompatActivity() {
             maxbanner,
             appnextbanner,
             "ca-app-pub-3940256099942544/2247696110",
-            googlebanner, 1, 1
+            googlebanner,
+            1,
+            1
         )
 
     }
