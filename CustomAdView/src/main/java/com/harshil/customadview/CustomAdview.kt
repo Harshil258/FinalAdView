@@ -117,9 +117,9 @@ class CustomAdview : LinearLayout {
     ) {
 
         if (isgoogle == true) {
-            val gadView = com.google.android.gms.ads.AdView(context)
+            var gadView = com.google.android.gms.ads.AdView(context)
             gadView.adUnitId = googlebanner
-            gadView.adSize = com.google.android.gms.ads.AdSize.SMART_BANNER
+            gadView.setAdSize(com.google.android.gms.ads.AdSize.SMART_BANNER)
             val adRequest = AdRequest.Builder().build()
             gadView.loadAd(adRequest)
             gadView.visibility = View.GONE
