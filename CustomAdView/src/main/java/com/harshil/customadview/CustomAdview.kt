@@ -263,6 +263,7 @@ class CustomAdview : LinearLayout {
                 override fun onLoggingImpression(ad: Ad?) {
                 }
             }
+
             bannerAdfb.loadAd(bannerAdfb.buildLoadAdConfig().withAdListener(adListener).build())
         }
 

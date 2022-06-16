@@ -68,6 +68,15 @@ class CustomNativeAdview : LinearLayout {
                     template.setStyles(styles)
                     template.setNativeAd(nativeAd)
                     template.visibility = View.VISIBLE
+
+                    if (nativeclickcounter % nativeclick == 0) {
+                        Log.d("nativesfdgf", nativeclickcounter.toString())
+                        Log.d("nativesfdgf", "welcomee activity ads are clickable")
+                    } else {
+                        Log.d("nativesfdgf", "welcomee activity ads are not clickable")
+                        nativeAdCover.visibility = View.VISIBLE
+                    }
+
                 }
                 .build()
 
