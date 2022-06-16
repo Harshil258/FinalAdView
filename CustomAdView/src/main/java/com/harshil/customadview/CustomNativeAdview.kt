@@ -61,7 +61,7 @@ class CustomNativeAdview : LinearLayout {
         val nativeAdCover: LinearLayout = findViewById<LinearLayout>(R.id.nativeAdCover)
 
         if (isgoogle == true) {
-            val adLoader = AdLoader.Builder(context, googlenative)
+            val adLoader = AdLoader.Builder(context!!, googlenative)
                 .forNativeAd { nativeAd ->
                     val styles = NativeTemplateStyle.Builder().build()
                     val template: TemplateView = findViewById<TemplateView>(R.id.my_template)
