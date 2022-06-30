@@ -1,9 +1,13 @@
 package com.Harshil.customadview
 
+import android.app.Activity
+import android.app.Application
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.harshil.customadview.CustomAdview
-import com.harshil.customadview.CustomNativeAdview
+import com.harshil.customadview.CustomInterstitial
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,35 +23,69 @@ class MainActivity : AppCompatActivity() {
 
 //        customadview.showCustomBanner(true, fbbanner, maxbanner, appnextbanner, googlebanner)
 
-//        customadview.showInterstitial(true,this,"adfgsadg","ca-app-pub-3940256099942544/1033173712")
-
 //        AppLovinSdk.getInstance(this).showMediationDebugger()
 //
-//        var customInterstitial: CustomInterstitial =
-//            CustomInterstitial(1)
-//
-//        customInterstitial.showInterstitial(
-//            true,
-//            this,
-//            "sdgsdgsdgsdg",
-//            googleinterstitial
-//        )
+        var customInterstitial: CustomInterstitial =
+            CustomInterstitial(1)
 
-        var customnativead: CustomNativeAdview =
-            findViewById<CustomNativeAdview>(R.id.customnativead)
-        customnativead.showCustomNative(
-            this,
+        val activityLifecycleCallbacks: Application.ActivityLifecycleCallbacks =
+            object : Application.ActivityLifecycleCallbacks {
+                override fun onActivityCreated(p0: Activity, p1: Bundle?) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onActivityStarted(p0: Activity) {
+                    Log.e(TAG, "onActivityStarted: " + p0.);
+                }
+
+                override fun onActivityResumed(p0: Activity) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onActivityPaused(p0: Activity) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onActivityStopped(p0: Activity) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onActivitySaveInstanceState(p0: Activity, p1: Bundle) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onActivityDestroyed(p0: Activity) {
+                    Log.e(TAG, "onActivityDestroyed: " + p0.localClassName);
+                }
+
+            }
+
+        this.getInstance().registerActivityLifecycleCallbacks(activityLifecycleCallbacks)
+
+
+
+        customInterstitial.showInterstitial(
             false,
-            "sdrtyjdyjdyjk",
-            "98ccfa1dbd2cee76",
-            fbbanner,
-            maxbanner,
-            appnextbanner,
-            "ca-app-pub-3940256099942544/2247696110",
-            googlebanner,
-            1,
-            100
+            this,
+            "4e2abcad1149a077",
+            googleinterstitial
         )
+
+//        var customnativead: CustomNativeAdview =
+//            findViewById<CustomNativeAdview>(R.id.customnativead)
+//        customnativead.showCustomNative(
+//            this,
+//            false,
+//            "sdrtyjdyjdyjk",
+//            "98ccfa1dbd2cee76",
+//            fbbanner,
+//            maxbanner,
+//            appnextbanner,
+//            "ca-app-pub-3940256099942544/2247696110",
+//            googlebanner,
+//            1,
+//            100
+//        )
 
     }
 }

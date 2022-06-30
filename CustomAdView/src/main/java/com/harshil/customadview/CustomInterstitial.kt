@@ -141,7 +141,11 @@ class CustomInterstitial {
                     override fun onAdHidden(ad: MaxAd?) {
                     }
 
-                    override fun onAdClicked(maxAd: MaxAd) {}
+                    override fun onAdClicked(maxAd: MaxAd) {
+                        Log.d("showInterstitial", "clicked and distroyed")
+                        interstitialAd.destroy()
+                    }
+
                     override fun onAdLoadFailed(adUnitId: String?, error: MaxError?) {
                         Log.d("showInterstitial", "ad load failed interstitial ${error.toString()}")
                         dialog.dismiss()
@@ -152,7 +156,6 @@ class CustomInterstitial {
                     }
                 })
                 interstitialAd.loadAd()
-                interstitialcount++
             }
         }
 
