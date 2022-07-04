@@ -82,7 +82,7 @@ class CustomInterstitial {
 
                 var dialog = Dialog(activity!!)
                 dialog.setContentView(R.layout.customloader)
-                dialog.setCancelable(false)
+                dialog.setCancelable(true)
                 dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.show()
 
@@ -121,7 +121,7 @@ class CustomInterstitial {
             if (interstitialcount % interstitialfrequancy.toInt() == 0) {
                 var dialog = Dialog(activity!!)
                 dialog.setContentView(R.layout.customloader)
-                dialog.setCancelable(false)
+                dialog.setCancelable(true)
                 dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.show()
 
@@ -132,7 +132,6 @@ class CustomInterstitial {
                         interstitialAd.showAd()
                         Log.d("showInterstitial", "interstitial loded")
                         dialog.dismiss()
-
                     }
 
                     override fun onAdDisplayed(ad: MaxAd?) {
@@ -153,6 +152,7 @@ class CustomInterstitial {
 
                     override fun onAdDisplayFailed(ad: MaxAd?, error: MaxError?) {
                         interstitialAd.loadAd()
+                        dialog.dismiss()
                     }
                 })
                 interstitialAd.loadAd()

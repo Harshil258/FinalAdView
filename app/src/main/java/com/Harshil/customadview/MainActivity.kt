@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onActivityStarted(p0: Activity) {
-                    Log.e(TAG, "onActivityStarted: " + p0.);
+                    Log.e(TAG, "onActivityStarted: " + p0.toString());
                 }
 
                 override fun onActivityResumed(p0: Activity) {
